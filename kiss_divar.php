@@ -16,6 +16,6 @@
 
     foreach ($result as $item){
         var_dump($item->title);
-        echo '<hr>';
+        echo '<br>';
     }
 ?>
