@@ -9,6 +9,9 @@
 //    mysqli_query($con, "set names 'utf8'");
     $con->query("set names 'utf8'");
     $html = file_get_html('http://hamikar.com');
+    foreach ($html->find('div.indexRowShow') as $item) {
+        $data[] = $item->plaintext;
+    }
     foreach ($html->find('div.indexRowShow') as $item){
         $title = $item->plaintext;
 //        mysqli_query($con, "INSERT INTO hamikar (title, url) VALUES ('$title', 'amir')");
