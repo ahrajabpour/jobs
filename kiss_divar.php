@@ -14,8 +14,31 @@
     // $response = Requests::get('http://laitec.ir/');
     $result = json_decode($response->body)->result->post_list;
 
+    // foreach ($result as $item){
+    //     echo $item->title;
+    //     echo '<br>';
+    // }
+
+    $con = new mysqli('localhost', 'root', '', 'crawler');
+    $con->query("SET character_set_results=utf8");
+    mb_language('uni');
+    mb_internal_encoding('UTF-8');
+    $con->query("set names 'utf8'");
+    $row = $con->query("SELECT title,id FROM divar ORDER BY id DESC LIMIT 1");
+    $last_title = $row->fetch_assoc();
+
     foreach ($result as $item){
-        var_dump($item->title);
-        echo '<br>';
+        if ($item->title == $last_title['title']) {
+            break;
+        }
+        else{
+            $links[] = $item->title;
+        }
     }
+
+    foreach (array_reverse($links) as $item){
+        $con->query("INSERT INTO divar (title, url) VALUES ('$item', 'amir')");
+    }
+
+    echo "ok";
 ?>
