@@ -9,11 +9,11 @@
 //    mysqli_query($con, "set names 'utf8'");
     $con->query("set names 'utf8'");
     $html = file_get_html('http://hamikar.com');
-    foreach ($html->find('div.indexRowShow') as $item) {
+    foreach ($html->find('div.indexJobsRow') as $item) {
         $data[] = $item->plaintext;
     }
-    foreach ($html->find('div.indexRowShow') as $item){
-        $title = $item->plaintext;
+    foreach (array_reverse($data) as $item){
+        $title = $item;
 //        mysqli_query($con, "INSERT INTO hamikar (title, url) VALUES ('$title', 'amir')");
         $con->query("INSERT INTO hamikar (title, url) VALUES ('$title', 'amir')");
     }
