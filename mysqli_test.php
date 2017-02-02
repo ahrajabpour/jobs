@@ -13,9 +13,11 @@
         $data[] = $item->plaintext;
     }
     foreach (array_reverse($data) as $item){
-        $title = $item;
+//        $title = $item;
 //        mysqli_query($con, "INSERT INTO hamikar (title, url) VALUES ('$title', 'amir')");
-        $con->query("INSERT INTO hamikar (title, url) VALUES ('$title', 'amir')");
+        $con->query("INSERT INTO hamikar (title, url) VALUES ('$item', 'amir')");
     }
-    echo 'ok';
+
+    $last_id = $con->insert_id;
+    echo $last_id;
  ?>
